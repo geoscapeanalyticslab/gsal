@@ -46,7 +46,7 @@ export default function Navbar() {
           />
           <div className="flex flex-col leading-none">
             <span className="text-lg md:text-2xl font-black tracking-wide whitespace-nowrap text-white">
-              GeoScape Analytics Lab <span className="mx-2 font-light opacity-60">|</span> GSAL
+              GeoScape Analytics Lab <span className="mx-2 font-light opacity-60"></span>
             </span>
           </div>
         </NavLink>
