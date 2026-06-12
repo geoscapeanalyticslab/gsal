@@ -26,23 +26,27 @@ export default function Navbar() {
 
   useEffect(() => setOpen(false), [pathname])
 
-  /* Style logic */
+  /* Style logic — dark navbar always, squeezes on scroll */
   const atop    = isHome && !scrolled
-  const navBg   = atop ? 'bg-transparent' : 'bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm'
-  const linkCol = atop ? 'text-white/80 hover:text-white' : 'text-gray-500 hover:text-forest-900'
-  const activeStyle = atop
-    ? 'text-white border-b-2 border-white'
-    : 'text-forest-900 border-b-2 border-forest-600'
+  const navBg   = atop
+    ? 'bg-transparent'
+    : 'bg-forest-950/95 backdrop-blur-md border-b border-forest-800 shadow-md'
+  const linkCol = 'text-white/80 hover:text-white'
+  const activeStyle = 'text-white border-b-2 border-white'
 
   return (
     <nav className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${navBg}`}>
-      <div className="max-w-7xl mx-auto px-6 h-[4.5rem] md:h-[10.5rem] flex items-center gap-8">
-        {/* Brand — stretches from left edge to nav links */}
+      <div className={`max-w-7xl mx-auto px-6 flex items-center gap-8 transition-all duration-300 ${scrolled ? 'h-[4rem] md:h-[5rem]' : 'h-[4.5rem] md:h-[10.5rem]'}`}>
+        {/* Brand */}
         <NavLink to="/" className="flex items-center gap-3 flex-1 min-w-0 select-none">
-          <img src="/gsal-logo-transparent.png" alt="GSAL Logo" className="h-20 w-auto" />
+          <img
+            src="/gsal-logo-transparent.png"
+            alt="GSAL Logo"
+            className={`w-auto transition-all duration-300 ${scrolled ? 'h-10 md:h-12' : 'h-12 md:h-28'}`}
+          />
           <div className="flex flex-col leading-none">
-            <span className={`text-lg md:text-2xl font-black tracking-wide whitespace-nowrap ${atop ? 'text-white' : 'text-forest-900'}`}>
-              GeoScape Analytics Lab <span className="mx-2 font-light opacity-60">|</span>
+            <span className="text-lg md:text-2xl font-black tracking-wide whitespace-nowrap text-white">
+              GeoScape Analytics Lab <span className="mx-2 font-light opacity-60">|</span> GSAL
             </span>
           </div>
         </NavLink>
@@ -66,7 +70,7 @@ export default function Navbar() {
         {/* Mobile toggle */}
         <button
           onClick={() => setOpen(o => !o)}
-          className={`md:hidden p-2 rounded-lg transition-colors ${atop ? 'text-white hover:bg-white/10' : 'text-gray-700 hover:bg-gray-100'}`}
+          className="md:hidden p-2 rounded-lg transition-colors text-white hover:bg-white/10"
           aria-label="Toggle menu"
         >
           {open ? <X size={22} /> : <Menu size={22} />}
@@ -76,7 +80,7 @@ export default function Navbar() {
       {/* Mobile drawer */}
       <div
         className={`md:hidden overflow-hidden transition-all duration-300 ${open ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}
-        style={{ background: '#fff', borderBottom: '1px solid #e5e7eb' }}
+        style={{ background: '#0d2b29', borderBottom: '1px solid #1d4a46' }}
       >
         <ul className="px-6 py-4 flex flex-col gap-1">
           {links.map(({ to, label }) => (
@@ -86,8 +90,8 @@ export default function Navbar() {
                 className={({ isActive }) =>
                   `block py-2.5 px-3 rounded-lg text-sm font-semibold transition-colors ${
                     isActive
-                      ? 'bg-forest-50 text-forest-900'
-                      : 'text-gray-600 hover:bg-gray-50 hover:text-forest-900'
+                      ? 'bg-white/10 text-white'
+                      : 'text-white/70 hover:bg-white/5 hover:text-white'
                   }`
                 }
               >
